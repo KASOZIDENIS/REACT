@@ -1,0 +1,23 @@
+.todo__list{
+    display:flex;
+    justify-content: center;
+    align-items: center;
+    width: 800px;
+    border: 1px solid rgb(37, 11, 123);
+    margin-bottom: 10px !important;
+    border-radius: 20px;
+    }
+    #DeleteIcon{
+        color: red;
+    }
+
+    #ListItem{
+        background-color: darkgrey;
+    }
+    #ListItemText{
+        background-color: darkgrey;
+    }
+
+ 
+
+  
