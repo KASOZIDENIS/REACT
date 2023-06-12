@@ -16,3 +16,9 @@
   background-color: #f44336;
   color: white;
 }
+/* responsiveness */
+.todo-list-container {
+  max-width: 100%;
+  overflow-x: auto;
+  white-space: nowrap;
+}
