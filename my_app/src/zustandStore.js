@@ -2,7 +2,6 @@ import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { create } from 'zustand';
 import { db } from './firebase';
-//import Todo from './components/Todo.css';
 import "./App.css";
 import { addDoc, collection, deleteDoc, doc, getDocs, serverTimestamp, updateDoc } from 'firebase/firestore';
 

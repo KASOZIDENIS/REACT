@@ -5,6 +5,14 @@ import { db } from './firebase.js';
 import { collection, query, orderBy, onSnapshot, addDoc, serverTimestamp } from 'firebase/firestore';
 import './App.css';
 import todoStore from './zustandStore';
+// responsiveness
+import useMediaQuery from '@mui/material/useMediaQuery';
+
+  function SimpleMediaQuery() {
+  const matches = useMediaQuery('(min-width:600px)');
+
+  return <span>{`(min-width:600px) matches: ${matches}`}</span>;
+}
 //importing bootstrap
 // import 'bootstrap/dist/css/bootstrap.min.css';
 // import { Container } from 'react-bootstrap';
