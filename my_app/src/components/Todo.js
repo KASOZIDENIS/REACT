@@ -1,8 +1,20 @@
 import React, { useState } from "react";
-import { List, ListItem, ListItemAvatar, ListItemText, Dialog, DialogTitle, DialogContent, DialogContentText, DialogActions, Button } from "@mui/material";
+import {
+  List,
+  ListItem,
+  ListItemAvatar,
+  ListItemText,
+  Dialog,
+  DialogTitle,
+  DialogContent,
+  DialogContentText,
+  DialogActions,
+  Button,
+} from "@mui/material";
 import DeleteIcon from "@mui/icons-material/Delete";
+import EditIcon from "@mui/icons-material/Edit";
 import { db } from "../firebase.js";
-import { doc, deleteDoc } from "firebase/firestore";
+import { doc, deleteDoc, updateDoc } from "firebase/firestore";
 import "./Todo.css";
 import todoStore from "../zustandStore.js";
 import { toast } from "react-toastify";
@@ -10,10 +22,40 @@ import { ThemeContext, useTheme } from "@emotion/react";
 
 const Todo = ({ item }) => {
   const [open, setOpen] = useState(false);
+  const [editMode, setEditMode] = useState(false);
+  const [editedTodo, setEditedTodo] = useState(item.todo);
   const deleteTodo = todoStore((state) => state.deleteTodo);
 
   const handleDeleteClick = () => {
     setOpen(true);
+  };
+
+  const handleEditClick = () => {
+    setEditMode(true);
+  };
+
+  const handleSaveClick = () => {
+    updateTodo()
+      .then(() => {
+        setEditMode(false);
+        toast.success("Todo updated successfully", { toastId: "edit-success" });
+      })
+      .catch((error) => {
+        toast.error("Error updating todo", { toastId: "edit-error" });
+      });
+  };
+
+  const updateTodo = async () => {
+    const todoRef = doc(db, "todos", item.id);
+    await updateDoc(todoRef, { todo: editedTodo });
+  };
+
+  const handleCloseDialog = () => {
+    setOpen(false);
+  };
+
+  const handleEditInputChange = (event) => {
+    setEditedTodo(event.target.value);
   };
 
   const handleConfirmDelete = () => {
@@ -28,18 +70,34 @@ const Todo = ({ item }) => {
       });
   };
 
-  const handleCloseDialog = () => {
-    setOpen(false);
-  };
-
   return (
     <>
       <List className="todo__list">
         {item && (
           <ListItem>
             <ListItemAvatar />
-            <ListItemText primary={item.todo} secondary={item.todo} />
+            {editMode ? (
+              <>
+                <input type="text" value={editedTodo} onChange={handleEditInputChange} />
+                <Button onClick={handleSaveClick}>Save</Button>
+              </>
+            ) : (
+              <ListItemText primary={item.todo} secondary={item.todo} />
+            )}
           </ListItem>
+        )}
+        {!editMode && (
+          <EditIcon
+            fontSize="large"
+            style={{
+              opacity: 0.7,
+              color: "blue",
+              cursor: "pointer",
+              borderRadius: "50%",
+              paddingRight: "12px",
+            }}
+            onClick={handleEditClick}
+          />
         )}
         <DeleteIcon
           fontSize="large"
@@ -48,7 +106,7 @@ const Todo = ({ item }) => {
             color: "red",
             cursor: "pointer",
             borderRadius: "50%",
-            paddingRight: "24px",
+            paddingRight: "12px",
           }}
           onClick={handleDeleteClick}
         />
