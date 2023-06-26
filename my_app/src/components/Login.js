@@ -1,125 +1,54 @@
-import React, { useState } from 'react';
-import {
-  Avatar,
-  Button,
-  CssBaseline,
-  TextField,
-  FormControlLabel,
-  Checkbox,
-  Link,
-  Grid,
-  Box,
-  Typography,
-  Container,
-} from '@material-ui/core';
-import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
-import { makeStyles } from '@material-ui/core/styles';
-
-const useStyles = makeStyles((theme) => ({
-  paper: {
-    marginTop: theme.spacing(8),
-    display: 'flex',
-    flexDirection: 'column',
-    alignItems: 'center',
-  },
-  avatar: {
-    margin: theme.spacing(1),
-    backgroundColor: theme.palette.secondary.main,
-  },
-  form: {
-    width: '100%', // Fix IE 11 issue.
-    marginTop: theme.spacing(1),
-  },
-  submit: {
-    margin: theme.spacing(3, 0, 2),
-  },
-}));
-
-export default function Login() {
-  const classes = useStyles();
-  const [loginData, setLoginData] = useState({
-    email: '',
-    password: '',
-  });
-
-  const handleLoginChange = (event) => {
-    const { name, value } = event.target;
-    setLoginData((prevData) => ({
-      ...prevData,
-      [name]: value,
-    }));
-  };
-
-  const handleLoginSubmit = (event) => {
-    event.preventDefault();
-    // Handle login submission logic here
-    console.log(loginData);
-  };
-
+import React, { useEffect, useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
+import { auth, signInWithEmailAndPassword, signInWithGoogle } from "./firebase";
+import { useAuthState } from "react-firebase-hooks/auth";
+import "./Login.css";
+function Login() {
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [user, loading, error] = useAuthState(auth);
+  const navigate = useNavigate();
+  useEffect(() => {
+    if (loading) {
+      // maybe trigger a loading screen
+      return;
+    }
+    if (user) navigate("/dashboard");
+  }, [user, loading]);
   return (
-    <Container component="main" maxWidth="xs">
-      <CssBaseline />
-      <div className={classes.paper}>
-        <Avatar className={classes.avatar}>
-          <LockOutlinedIcon />
-        </Avatar>
-        <Typography component="h1" variant="h5">
+    <div className="login">
+      <div className="login__container">
+        <input
+          type="text"
+          className="login__textBox"
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
+          placeholder="E-mail Address"
+        />
+        <input
+          type="password"
+          className="login__textBox"
+          value={password}
+          onChange={(e) => setPassword(e.target.value)}
+          placeholder="Password"
+        />
+        <button
+          className="login__btn"
+          onClick={() => signInWithEmailAndPassword(email, password)}
+        >
           Login
-        </Typography>
-        <form className={classes.form} onSubmit={handleLoginSubmit}>
-          <TextField
-            variant="outlined"
-            margin="normal"
-            required
-            fullWidth
-            id="email"
-            label="Email Address"
-            name="email"
-            autoComplete="email"
-            autoFocus
-            value={loginData.email}
-            onChange={handleLoginChange}
-          />
-          <TextField
-            variant="outlined"
-            margin="normal"
-            required
-            fullWidth
-            name="password"
-            label="Password"
-            type="password"
-            id="password"
-            autoComplete="current-password"
-            value={loginData.password}
-            onChange={handleLoginChange}
-          />
-          <FormControlLabel
-            control={<Checkbox value="remember" color="primary" />}
-            label="Remember me"
-          />
-          <Button
-            type="submit"
-            fullWidth
-            variant="contained"
-            color="primary"
-            className={classes.submit}
-          >
-            Sign In
-          </Button>
-          <Grid container>
-            <Grid item xs>
-              <Link href="#" variant="body2">
-                Forgot password?
-              </Link>
-            </Grid>
-            <Grid item>
-              <Link href="Sigup.js" variant="body2">
-                {"Don't have an account? Sign Up"}
-              </Link>
-            </Grid>
-          </Grid>
-        </form>
+        </button>
+        <button className="login__btn login__google" onClick={signInWithGoogle}>
+          Login with Google
+        </button>
+        <div>
+          <Link to="/reset">Forgot Password</Link>
+        </div>
+        <div>
+          Don't have an account? <Link to="/register">Register</Link> now.
+        </div>
       </div>
-    </Container>
+    </div>
   );
 }
+export default Login;

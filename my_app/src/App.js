@@ -2,7 +2,6 @@ import React, { useState, useEffect } from 'react';
 import { TextField, Button, Grid, Typography } from '@mui/material';
 import Todo from './components/Todo';
 import Login from './components/Login';
-import Signup from './components/Signup';
 import { db } from './firebase.js';
 import { collection, query, orderBy, onSnapshot, addDoc, serverTimestamp } from 'firebase/firestore';
 import './App.css';
@@ -10,11 +9,20 @@ import todoStore from './zustandStore';
 import { Container } from '@mui/material';
 import { Box } from '@mui/material';
 
+//imports for login page and google auth using firebase imports
+import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
+import Register from "./components/Register";
+import Reset from "./components/Reset";
+import Dashboard from "./components/Dashboard";
+
 
 
 const q = query(collection(db, 'todos'), orderBy('timestamp', 'desc'));
 
 function App() {
+
+  //login router konfigs
+  
   const todos = todoStore((state) => state.todos);
   const addTodo = todoStore((state) => state.addTodo);
   const getTodos = todoStore((state) => state.getTodos);
@@ -32,7 +40,24 @@ function App() {
   };
 
   return (
+   
     <Container maxWidth="md">
+
+{/* //router konfigs start here */}
+
+<div className="app">
+    <Router>
+      <Routes>
+        <Route exact path="/" element={<Login />} />
+        <Route exact path="/register" element={<Register />} />
+        <Route exact path="/reset" element={<Reset />} />
+        <Route exact path="/dashboard" element={<Dashboard />} />
+      </Routes>
+    </Router>
+  </div>
+
+  {/* //router konfigs stop here */}
+
       <h2>TODO List App</h2>
       <form>
         <Grid container alignItems="center" justifyContent="center" spacing={2}>
@@ -63,8 +88,7 @@ function App() {
         ))}
       </Box>
       
-      )}
-    
+      )}    
    </Container>
   );
 }
