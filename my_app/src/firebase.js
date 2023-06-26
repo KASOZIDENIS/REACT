@@ -1,6 +1,10 @@
 import 'firebase/compat/database';
 import { initializeApp } from "firebase/app";
 import { getFirestore } from 'firebase/firestore';
+import 'firebase/auth';
+// import { initializeApp } from 'firebase/compat/app';
+// import { getFirestore } from 'firebase/compat/firestore';
+
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
 

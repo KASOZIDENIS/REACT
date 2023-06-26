@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { TextField, Button, Grid, Typography } from '@mui/material';
 import Todo from './components/Todo';
+import Login from './components/Login';
+import Signup from './components/Signup';
 import { db } from './firebase.js';
 import { collection, query, orderBy, onSnapshot, addDoc, serverTimestamp } from 'firebase/firestore';
 import './App.css';
@@ -62,6 +64,7 @@ function App() {
       </Box>
       
       )}
+    
    </Container>
   );
 }
