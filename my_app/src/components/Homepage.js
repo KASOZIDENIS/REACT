@@ -7,9 +7,14 @@ import '../App.css';
 import todoStore from '../zustandStore';
 import { Container } from '@mui/material';
 import { Box } from '@mui/material';
+// import Register from './Register';
+// import Login from './Login';
+import { useNavigate } from 'react-router-dom';
 
-
+// eslint-disable-next-line 
 const q = query(collection(db, 'todos'), orderBy('timestamp', 'desc'));
+
+
 
 function Homepage() {
   const todos = todoStore((state) => state.todos);
@@ -18,8 +23,10 @@ function Homepage() {
 
   const [input, setInput] = useState('');
 
+  var navigate = useNavigate();
+
   useEffect(() => {
-    getTodos();
+    getTodos(); // eslint-disable-next-line 
   }, [todos?.length]);
 
   const handleAddTodo = async (e) => {
@@ -29,7 +36,12 @@ function Homepage() {
   };
 
   return (
-   
+    <>
+    {/* //kalling signup button */}
+    <Button variant='outlined' onClick={(e)=>navigate("/register")}>Signup</Button>
+    <Button variant='outlined' onClick={(e)=>navigate("/login")}>LOGIN</Button>  
+
+    {/* Todo kontainer */}   
     <Container maxWidth="md">
 
       <h2>TODO List App</h2>
@@ -64,6 +76,7 @@ function Homepage() {
       
       )}    
    </Container>
+   </>
   );
 }
 

@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+// import React, { useState, useEffect } from 'react';
 import Login from './components/Login';
 import './App.css';
 import { Container } from '@mui/material';
@@ -15,9 +15,9 @@ function App() {
 <div className="app">
     <Router>
       <Routes>
-        <Route path='/homepage' element={<Homepage/>}/>
+        <Route path='/' element={<Homepage/>}/>
         <Route path="/login" element={<Login />} />
-        <Route path="/register/" element={<Register />} />
+        <Route path="/register" element={<Register />} />
         <Route path="/reset" element={<Reset />} />
         <Route path="/dashboard" element={<Dashboard />} />
       </Routes>

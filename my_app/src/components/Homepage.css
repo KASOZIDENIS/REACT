@@ -22,3 +22,9 @@
   overflow-x: auto;
   white-space: nowrap;
 }
+/* signup and login buttons*/
+.Signupbutton{
+    align-self: left;
+    margin: 100px;
+    padding-right: 40px;
+}

@@ -50,7 +50,7 @@ import {
   where,
   addDoc,
 } from "firebase/firestore";
-import { useNavigate } from 'react-router-dom';
+// import { useNavigate } from 'react-router-dom';
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
 
@@ -92,15 +92,14 @@ const signInWithGoogle = async () => {
   }
 };
 const logInWithEmailAndPassword = async (email, password) => {
-  var navigate = useNavigate();
   try {
     let response = await signInWithEmailAndPassword(auth, email, password);
-    if(response){
-      navigate("/dashboard");
-    }
+    return response;
+    
   } catch (err) {
     console.error(err);
     alert(err.message);
+    return null;
   }
 };
 const registerWithEmailAndPassword = async (name, email, password) => {
