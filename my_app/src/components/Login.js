@@ -10,7 +10,7 @@ function Login() {
   const navigate = useNavigate();
   useEffect(() => {
     if (loading) {
-      // maybe trigger a loading screen
+      //  trigger a loading screen
       return;
     }
     if (user) navigate("/dashboard");
