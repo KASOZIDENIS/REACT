@@ -11,9 +11,9 @@ import { Box } from '@mui/material';
 
 //imports for login page and google auth using firebase imports
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
-import Register from "./components/Register";
-import Reset from "./components/Reset";
-import Dashboard from "./components/Dashboard";
+import Register from "./components/Register.js";
+import Reset from "./components/Reset.js";
+import Dashboard from "./components/Dashboard.js";
 
 
 
@@ -48,10 +48,10 @@ function App() {
 <div className="app">
     <Router>
       <Routes>
-        <Route exact path="/" element={<Login />} />
-        <Route exact path="/register" element={<Register />} />
-        <Route exact path="/reset" element={<Reset />} />
-        <Route exact path="/dashboard" element={<Dashboard />} />
+        <Route path="/login" element={<Login />} />
+        <Route path="/register/" element={<Register />} />
+        <Route path="/reset" element={<Reset />} />
+        <Route path="/dashboard" element={<Dashboard />} />
       </Routes>
     </Router>
   </div>
