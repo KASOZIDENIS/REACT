@@ -10,12 +10,10 @@ import { Box } from '@mui/material';
 // import Register from './Register';
 // import Login from './Login';
 import { useNavigate } from 'react-router-dom';
+import CurrentDate from './CurrentDate';
 
 // eslint-disable-next-line 
 const q = query(collection(db, 'todos'), orderBy('timestamp', 'desc'));
-
-
-
 function Homepage() {
   const todos = todoStore((state) => state.todos);
   const addTodo = todoStore((state) => state.addTodo);
@@ -38,6 +36,8 @@ function Homepage() {
   return (
     <>
     {/* //kalling signup button */}
+    <br/>
+    
     <Button variant='outlined' onClick={(e)=>navigate("/register")}>Signup</Button>
     <Button variant='outlined' onClick={(e)=>navigate("/login")}>LOGIN</Button>  
 
@@ -45,6 +45,7 @@ function Homepage() {
     <Container maxWidth="md">
 
       <h2>TODO List App</h2>
+      <CurrentDate/>
       <form>
         <Grid container alignItems="center" justifyContent="center" spacing={2}>
           <Grid item xs={12} sm={8} md = {9}>

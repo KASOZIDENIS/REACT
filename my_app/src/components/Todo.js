@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import {
   List,
   ListItem,
-  ListItemAvatar,
+  // ListItemAvatar,
   ListItemText,
   Dialog,
   DialogTitle,
@@ -13,12 +13,12 @@ import {
 } from "@mui/material";
 import DeleteIcon from "@mui/icons-material/Delete";
 import EditIcon from "@mui/icons-material/Edit";
-import { db } from "../firebase.js";
+import { db } from "../firebase.js";// eslint-disable-next-line
 import { doc, deleteDoc, updateDoc } from "firebase/firestore";
 import "./Todo.css";
 import todoStore from "../zustandStore.js";
 import { toast } from "react-toastify";
-import { ThemeContext, useTheme } from "@emotion/react";
+// import { ThemeContext, useTheme } from "@emotion/react";
 
 const Todo = ({ item }) => {
   const [open, setOpen] = useState(false);
@@ -75,7 +75,7 @@ const Todo = ({ item }) => {
       <List className="todo__list">
         {item && (
           <ListItem>
-            <ListItemAvatar />
+            {/* <ListItemAvatar /> */}
             {editMode ? (
               <>
                 <input type="text" value={editedTodo} onChange={handleEditInputChange} />

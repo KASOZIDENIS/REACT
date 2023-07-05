@@ -1,3 +1,4 @@
+// Login.js
 import React, { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { auth, logInWithEmailAndPassword, signInWithGoogle } from "../firebase";
@@ -12,11 +13,17 @@ function Login() {
 
   useEffect(() => {
     if (loading) {
-      //  trigger a loading screen
+      // trigger a loading screen
       return;
     }
-    if (user) { navigate("/"); }
-  }, [user, loading,navigate]);
+    if (user) {
+      navigate("/");
+    }
+  }, [user, loading, navigate]);
+
+  if (user) {
+    return <p>Welcome, user! You are logged in.</p>;
+  }
 
   return (
     <div className="login">
@@ -41,13 +48,12 @@ function Login() {
           onClick={async () => {
             var response = await logInWithEmailAndPassword(email, password);
 
-            if(response){
-              console.log('successfull');
+            if (response) {
+              console.log("successfull");
               navigate("/");
-            }else{
+            } else {
               // displayErrorToast("dfdf");
             }
-
           }}
         >
           Login
@@ -59,10 +65,11 @@ function Login() {
           <Link to="/reset">Forgot Password</Link>
         </div>
         <div>
-          Don't have an account? <Link to="Register">Register</Link> now.
+          Don't have an account? <Link to="/Register">Register</Link> now.
         </div>
       </div>
     </div>
   );
 }
+
 export default Login;

@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom";
 import "./Dashboard.css";
 import { auth, db, logout } from "../firebase";
 import { query, collection, getDocs, where } from "firebase/firestore";
-function Dashboard() {
+function Dashboard() {// eslint-disable-next-line 
   const [user, loading, error] = useAuthState(auth);
   const [name, setName] = useState("");
   const navigate = useNavigate();
@@ -22,12 +22,12 @@ function Dashboard() {
   useEffect(() => {
     if (loading) return;
     if (!user) return navigate("/");
-    fetchUserName();
+    fetchUserName();// eslint-disable-next-line 
   }, [user, loading]);
   return (
     <div className="dashboard">
        <div className="dashboard__container">
-        Logged in as
+        You are most welcome {name}
          <div>{name}</div>
          <div>{user?.email}</div>
          <button className="dashboard__btn" onClick={logout}>

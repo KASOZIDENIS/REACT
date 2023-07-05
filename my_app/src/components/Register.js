@@ -1,7 +1,8 @@
+// Register.js
 import React, { useEffect, useState } from "react";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { Link } from "react-router-dom";
-import { useNavigate } from 'react-router-dom';
+import { useNavigate } from "react-router-dom";
 
 import {
   auth,
@@ -9,25 +10,29 @@ import {
   signInWithGoogle,
 } from "../firebase";
 import "./Register.css";
-//imports end here
 
 function Register() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [name, setName] = useState("");
+  const [name, setName] = useState("");// eslint-disable-next-line
   const [user, loading, error] = useAuthState(auth);
 
   const navigate = useNavigate();
+
+  useEffect(() => {
+    if (loading) return;
+    if (user) navigate("/dashboard");
+  }, [user, loading, navigate]);
+
+  if (user) {
+    return <p>Welcome, user! You are logged in.</p>;
+  }
 
   const register = () => {
     if (!name) alert("Please enter name");
     registerWithEmailAndPassword(name, email, password);
   };
-  useEffect(() => {
-    if (loading) return;
-    if (user) navigate("/dashboard");
 
-  }, [user, loading]);
   return (
     <div className="register">
       <div className="register__container">
@@ -62,10 +67,11 @@ function Register() {
           Register with Google
         </button>
         <div>
-          Already have an account? <Link to="Login.js">Login</Link> now.
+          Already have an account? <Link to="/Login">Login</Link> now.
         </div>
       </div>
     </div>
   );
 }
+
 export default Register;

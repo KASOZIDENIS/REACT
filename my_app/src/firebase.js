@@ -50,12 +50,6 @@ import {
   where,
   addDoc,
 } from "firebase/firestore";
-// import { useNavigate } from 'react-router-dom';
-// TODO: Add SDKs for Firebase products that you want to use
-// https://firebase.google.com/docs/web/setup#available-libraries
-
-// Your web app's Firebase configuration
-// For Firebase JS SDK v7.20.0 and later, measurementId is optional
 const firebaseConfig = {
   apiKey: "AIzaSyCSZo3tcmV54-DllU92BdSY3jp7-yXz86k",
   authDomain: "zillah-c9c6f.firebaseapp.com",
