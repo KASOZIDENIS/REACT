@@ -1,4 +1,3 @@
-app.css
 .App {
   display:grid;
   place-items:center;
@@ -19,7 +18,7 @@ app.css
 }
 /* responsiveness */
 .todo-list-container {
-  max-width: 80%;
+  max-width: 100%;
   overflow-x: auto;
   white-space: nowrap;
 }

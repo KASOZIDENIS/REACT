@@ -82,7 +82,7 @@ const Todo = ({ item }) => {
                 <Button onClick={handleSaveClick}>Save</Button>
               </>
             ) : (
-              <ListItemText primary={item.todo} secondary={item.todo} />
+              <ListItemText checkbox primary={item.todo} secondary={item.todo} />
             )}
           </ListItem>
         )}

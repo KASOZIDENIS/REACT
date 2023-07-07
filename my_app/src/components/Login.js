@@ -12,13 +12,9 @@ function Login() {
   const navigate = useNavigate();
 
   useEffect(() => {
-    if (loading) {
-      // trigger a loading screen
-      return;
-    }
-    if (user) {
-      navigate("/");
-    }
+    if (loading)return;
+      if (user) navigate("/");    
+    
   }, [user, loading, navigate]);
 
   if (user) {

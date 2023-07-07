@@ -2,9 +2,8 @@ import React, { useEffect, useState } from "react";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { useNavigate } from "react-router-dom";
 import "./Dashboard.css";
-import { auth, db, logout} from "../firebase";
+import { auth, db} from "../firebase";
 import { query, collection, getDocs, where } from "firebase/firestore";
-import Homepage from "./Homepage";
 function Dashboard() {// eslint-disable-next-line 
   const [user, loading, error] = useAuthState(auth);
   const [name, setName] = useState("");
@@ -27,17 +26,14 @@ function Dashboard() {// eslint-disable-next-line
   }, [user, loading]);
   return (
     <div className="dashboard">
-       <button className="dashboard__btn" onClick={logout}  style={{ display: 'grid', justifyContent: 'end' }}>
-          Logout
-         </button>
        <div className="dashboard__container">
-       
-        YOU ARE WELCOME -
+        USER NAME -
          {name}
-        
-         {/* <div>{user?.email}</div> */}
+          <br/>
          
-         <Homepage/>
+         <div>EMAIL: {user?.email}</div>
+         
+         
        </div>
      </div>
   );

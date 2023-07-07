@@ -12,11 +12,10 @@ import Button from '@mui/material/Button';
 import Tooltip from '@mui/material/Tooltip';
 import MenuItem from '@mui/material/MenuItem';
 import AdbIcon from '@mui/icons-material/Adb';
-// import Homepage from './Homepage';
-// import './Dashboard';
+import { Link } from 'react-router-dom';
 
-const pages = ['Dashboard' , '  ', 'Blog'];
-const settings = ['Profile', 'Account', 'Dashboard', 'Logout'];
+const pages = ['homepage','dashboard', 'aboutpage'];
+const settings = ['profilepage', 'register', 'logout'];
 
 export default function ResponsiveAppBar() {
   const [anchorElNav, setAnchorElNav] = React.useState(null);
@@ -25,6 +24,7 @@ export default function ResponsiveAppBar() {
   const handleOpenNavMenu = (event) => {
     setAnchorElNav(event.currentTarget);
   };
+
   const handleOpenUserMenu = (event) => {
     setAnchorElUser(event.currentTarget);
   };
@@ -45,8 +45,8 @@ export default function ResponsiveAppBar() {
           <Typography
             variant="h6"
             noWrap
-            component="a"
-            href="/"
+            component={Link}
+            to="/"
             sx={{
               mr: 2,
               display: { xs: 'none', md: 'flex' },
@@ -57,7 +57,7 @@ export default function ResponsiveAppBar() {
               textDecoration: 'none',
             }}
           >
-             KASOZIAPP
+            KASOZIAPP
           </Typography>
 
           <Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}>
@@ -91,7 +91,9 @@ export default function ResponsiveAppBar() {
             >
               {pages.map((page) => (
                 <MenuItem key={page} onClick={handleCloseNavMenu}>
-                  <Typography textAlign="center">{page}</Typography>
+                  <Typography textAlign="center" component={Link} to={`/${page}`} style={{ textDecoration: 'none', color: 'black' }}>
+                    {page}
+                  </Typography>
                 </MenuItem>
               ))}
             </Menu>
@@ -100,8 +102,8 @@ export default function ResponsiveAppBar() {
           <Typography
             variant="h5"
             noWrap
-            component="a"
-            href="/"
+            component={Link}
+            to="/"
             sx={{
               mr: 2,
               display: { xs: 'flex', md: 'none' },
@@ -113,7 +115,7 @@ export default function ResponsiveAppBar() {
               textDecoration: 'none',
             }}
           >
-          KASOZI
+            KASOZI
           </Typography>
           <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
             {pages.map((page) => (
@@ -121,6 +123,9 @@ export default function ResponsiveAppBar() {
                 key={page}
                 onClick={handleCloseNavMenu}
                 sx={{ my: 2, color: 'white', display: 'block' }}
+                component={Link}
+                to={`/${page}`}
+                style={{ textDecoration: 'none', color: 'black' }}
               >
                 {page}
               </Button>
@@ -130,7 +135,7 @@ export default function ResponsiveAppBar() {
           <Box sx={{ flexGrow: 0 }}>
             <Tooltip title="Open settings">
               <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-                <Avatar alt="Remy Sharp" src="/static/images/avatar/2.jpg" />
+                <Avatar alt="" src="/static/images/avatar/2.jpg" />
               </IconButton>
             </Tooltip>
             <Menu
@@ -151,7 +156,9 @@ export default function ResponsiveAppBar() {
             >
               {settings.map((setting) => (
                 <MenuItem key={setting} onClick={handleCloseUserMenu}>
-                  <Typography textAlign="center">{setting}</Typography>
+                  <Typography textAlign="center" component={Link} to={`/${setting}`} style={{ textDecoration: 'none', color: 'black' }}>
+                    {setting}
+                  </Typography>
                 </MenuItem>
               ))}
             </Menu>

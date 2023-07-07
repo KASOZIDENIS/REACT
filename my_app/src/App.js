@@ -9,6 +9,8 @@ import Reset from "./components/Reset.js";
 import Dashboard from "./components/Dashboard.js";
 import Homepage from "./components/Homepage"; 
 import StickyFooter from './components/StickyFooter';
+import AboutPage from './components/AboutPage';
+import ProfilePage from './components/ProfilePage';
 
 function App() {
   return (   
@@ -19,10 +21,13 @@ function App() {
            <ResponsiveAppBar />
       <Routes>
         <Route path='/' element={<Homepage/>}/>
+        <Route path='homepage' element={<Homepage/>}/>
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
         <Route path="/reset" element={<Reset />} />
         <Route path="/dashboard" element={<Dashboard />} />
+        <Route path='aboutpage' element = {<AboutPage/>} />
+        <Route path='profilepage' element={<ProfilePage/>} />
       </Routes>
       <StickyFooter />
     </Router>
