@@ -4,21 +4,25 @@ import { Link, useNavigate } from "react-router-dom";
 import { auth, logInWithEmailAndPassword, signInWithGoogle } from "../firebase";
 import { useAuthState } from "react-firebase-hooks/auth";
 import "./Login.css";
+import Dashboard from "./Dashboard"
 
 function Login() {
+
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [user, loading] = useAuthState(auth);
   const navigate = useNavigate();
 
+
   useEffect(() => {
-    if (loading)return;
-      if (user) navigate("/");    
+    console.log("login clicked");
+    if (loading) return;
+      if (user) navigate("/dashboard");    
     
   }, [user, loading, navigate]);
 
   if (user) {
-    return <p>Welcome, user! You are logged in.</p>;
+    return <Dashboard />
   }
 
   return (
@@ -46,7 +50,7 @@ function Login() {
 
             if (response) {
               console.log("successfull");
-              navigate("/");
+              navigate("/dashboard");
             } else {
               // displayErrorToast("dfdf");
             }

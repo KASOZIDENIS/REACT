@@ -120,8 +120,17 @@ const sendPasswordReset = async (email) => {
     alert(err.message);
   }
 };
-const logout = () => {
-  signOut(auth);
+const logout = async () => {
+
+  try {
+    await signOut(auth);
+    return true;
+  } catch (error) {
+    console.log("FAILED TO LOGOUT")
+    return false;
+  }
+
+
 };
 export {
   auth,

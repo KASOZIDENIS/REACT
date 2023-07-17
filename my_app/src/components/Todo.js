@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import {
   List,
   ListItem,
-  // ListItemAvatar,
+  ListItemAvatar,
   ListItemText,
   Dialog,
   DialogTitle,
@@ -73,10 +73,10 @@ const Todo = ({ item }) => {
   return (
     <>
     
-      <List className="todo__list">
+          <List className="todo__list">
         {item && (
           <ListItem>
-            {/* <ListItemAvatar /> */}
+            <ListItemAvatar />
             {editMode ? (
               <>
                 <input type="text" value={editedTodo} onChange={handleEditInputChange} />

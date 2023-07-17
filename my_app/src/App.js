@@ -1,6 +1,5 @@
-// import React, { useState, useEffect } from 'react';
 import ResponsiveAppBar from './components/Navbar';
-import Login from './components/Login';
+import Login from './components/Login.js';
 import './App.css';
 import { Container } from '@mui/material';
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
@@ -11,6 +10,10 @@ import Homepage from "./components/Homepage";
 import StickyFooter from './components/StickyFooter';
 import AboutPage from './components/AboutPage';
 import ProfilePage from './components/ProfilePage';
+import AccessDenied from './components/AccessDenied';
+import BackToTop from './components/BackToTopIcon';
+// import Demo from './components/Demonstration.js';
+
 
 function App() {
   return (   
@@ -19,17 +22,21 @@ function App() {
 <div className="app">
     <Router>
            <ResponsiveAppBar />
+           <BackToTop/>
       <Routes>
-        <Route path='/' element={<Homepage/>}/>
-        <Route path='homepage' element={<Homepage/>}/>
-        <Route path="/login" element={<Login />} />
-        <Route path="/register" element={<Register />} />
+        {/* <Route path="/demo" element={<Demonstration />}/> */}
+        <Route path="/" element={<Homepage />} />
+        <Route path="/homepage" element={<Homepage />} />
+        <Route path ="/access_denied" element={<AccessDenied/>}/>
+        <Route path="/register" element={<Register />} />       
+        <Route path='/login' element={<Login/>}/>        
         <Route path="/reset" element={<Reset />} />
         <Route path="/dashboard" element={<Dashboard />} />
-        <Route path='aboutpage' element = {<AboutPage/>} />
-        <Route path='profilepage' element={<ProfilePage/>} />
+        <Route path='/aboutpage' element = {<AboutPage/>} />
+        <Route path='/profilepage' element={<ProfilePage/>} />
+
       </Routes>
-      <StickyFooter />
+        <StickyFooter />
     </Router>
   </div> 
    </Container>

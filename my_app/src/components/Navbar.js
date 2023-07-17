@@ -11,13 +11,15 @@ import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
 import Tooltip from '@mui/material/Tooltip';
 import MenuItem from '@mui/material/MenuItem';
-import AdbIcon from '@mui/icons-material/Adb';
 import { Link } from 'react-router-dom';
+import CheckCircleIcon from '@mui/icons-material/CheckCircle';
 
-const pages = ['homepage','dashboard', 'aboutpage'];
-const settings = ['profilepage', 'register', 'logout'];
+const pages = ['homepage', 'dashboard', 'aboutpage'];
+const settings = ['profilepage', 'logout'];
+const NotLoggedPages = ['homepage', 'aboutpage'];
+const NotLoggedInSettings = ['register', 'login'];
 
-export default function ResponsiveAppBar() {
+export default function ResponsiveAppBar({ loggedIn }) {
   const [anchorElNav, setAnchorElNav] = React.useState(null);
   const [anchorElUser, setAnchorElUser] = React.useState(null);
 
@@ -41,7 +43,7 @@ export default function ResponsiveAppBar() {
     <AppBar position="static">
       <Container maxWidth="80%">
         <Toolbar disableGutters>
-          <AdbIcon sx={{ display: { xs: 'none', md: 'flex' }, mr: 1 }} />
+          <CheckCircleIcon />
           <Typography
             variant="h6"
             noWrap
@@ -57,7 +59,7 @@ export default function ResponsiveAppBar() {
               textDecoration: 'none',
             }}
           >
-            KASOZIAPP
+            TODOAPP
           </Typography>
 
           <Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}>
@@ -89,16 +91,34 @@ export default function ResponsiveAppBar() {
                 display: { xs: 'block', md: 'none' },
               }}
             >
-              {pages.map((page) => (
-                <MenuItem key={page} onClick={handleCloseNavMenu}>
-                  <Typography textAlign="center" component={Link} to={`/${page}`} style={{ textDecoration: 'none', color: 'black' }}>
-                    {page}
-                  </Typography>
-                </MenuItem>
-              ))}
+              {loggedIn
+                ? pages.map((page) => (
+                    <MenuItem key={page} onClick={handleCloseNavMenu}>
+                      <Typography
+                        textAlign="center"
+                        component={Link}
+                        to={`/${page}`}
+                        style={{ textDecoration: 'none', color: 'black' }}
+                      >
+                        {page}
+                      </Typography>
+                    </MenuItem>
+                  ))
+                : NotLoggedPages.map((page) => (
+                    <MenuItem key={page} onClick={handleCloseNavMenu}>
+                      <Typography
+                        textAlign="center"
+                        component={Link}
+                        to={`/${page}`}
+                        style={{ textDecoration: 'none', color: 'black' }}
+                      >
+                        {page}
+                      </Typography>
+                    </MenuItem>
+                  ))}
             </Menu>
           </Box>
-          <AdbIcon sx={{ display: { xs: 'flex', md: 'none' }, mr: 1 }} />
+
           <Typography
             variant="h5"
             noWrap
@@ -115,29 +135,50 @@ export default function ResponsiveAppBar() {
               textDecoration: 'none',
             }}
           >
-            KASOZI
+            TODO APP
           </Typography>
           <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
-            {pages.map((page) => (
-              <Button
-                key={page}
-                onClick={handleCloseNavMenu}
-                sx={{ my: 2, color: 'white', display: 'block' }}
-                component={Link}
-                to={`/${page}`}
-                style={{ textDecoration: 'none', color: 'black' }}
-              >
-                {page}
-              </Button>
-            ))}
+            {loggedIn
+              ? pages.map((page) => (
+                  <Button
+                    key={page}
+                    onClick={handleCloseNavMenu}
+                    sx={{ my: 2, color: 'white', display: 'block' }}
+                    component={Link}
+                    to={`/${page}`}
+                    style={{ textDecoration: 'none', color: 'black' }}
+                  >
+                    {page}
+                  </Button>
+                ))
+              : NotLoggedPages.map((page) => (
+                  <Button
+                    key={page}
+                    onClick={handleCloseNavMenu}
+                    sx={{ my: 2, color: 'white', display: 'block' }}
+                    component={Link}
+                    to={`/${page}`}
+                    style={{ textDecoration: 'none', color: 'black' }}
+                  >
+                    {page}
+                  </Button>
+                ))}
           </Box>
 
           <Box sx={{ flexGrow: 0 }}>
-            <Tooltip title="Open settings">
-              <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-                <Avatar alt="" src="/static/images/avatar/2.jpg" />
-              </IconButton>
-            </Tooltip>
+            {loggedIn ? (
+              <Tooltip title="Open settings">
+                <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
+                  <Avatar alt="" src="/static/images/avatar/2.jpg" />
+                </IconButton>
+              </Tooltip>
+            ) : (
+              <Tooltip title="Open settings">
+                <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
+                  <Avatar alt="" src="/static/images/avatar/2.jpg" />
+                </IconButton>
+              </Tooltip>
+            )}
             <Menu
               sx={{ mt: '45px' }}
               id="menu-appbar"
@@ -154,13 +195,31 @@ export default function ResponsiveAppBar() {
               open={Boolean(anchorElUser)}
               onClose={handleCloseUserMenu}
             >
-              {settings.map((setting) => (
-                <MenuItem key={setting} onClick={handleCloseUserMenu}>
-                  <Typography textAlign="center" component={Link} to={`/${setting}`} style={{ textDecoration: 'none', color: 'black' }}>
-                    {setting}
-                  </Typography>
-                </MenuItem>
-              ))}
+              {loggedIn
+                ? settings.map((setting) => (
+                    <MenuItem key={setting} onClick={handleCloseUserMenu}>
+                      <Typography
+                        textAlign="center"
+                        component={Link}
+                        to={`/${setting}`}
+                        style={{ textDecoration: 'none', color: 'black' }}
+                      >
+                        {setting}
+                      </Typography>
+                    </MenuItem>
+                  ))
+                : NotLoggedInSettings.map((setting) => (
+                    <MenuItem key={setting} onClick={handleCloseUserMenu}>
+                      <Typography
+                        textAlign="center"
+                        component={Link}
+                        to={`/${setting}`}
+                        style={{ textDecoration: 'none', color: 'black' }}
+                      >
+                        {setting}
+                      </Typography>
+                    </MenuItem>
+                  ))}
             </Menu>
           </Box>
         </Toolbar>

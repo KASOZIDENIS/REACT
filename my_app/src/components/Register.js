@@ -10,6 +10,7 @@ import {
   signInWithGoogle,
 } from "../firebase";
 import "./Register.css";
+import Dashboard from "./Dashboard";
 
 function Register() {
   const [email, setEmail] = useState("");
@@ -20,12 +21,13 @@ function Register() {
   const navigate = useNavigate();
 
   useEffect(() => {
+    console.log("TEH REGISTER PAGE HAS BEEN VISITED")
     if (loading) return;
     if (user) navigate("/dashboard");
   }, [user, loading, navigate]);
 
   if (user) {
-    return <p>Welcome, user! You are logged in.</p>;
+    return <Dashboard/>
   }
 
   const register = () => {

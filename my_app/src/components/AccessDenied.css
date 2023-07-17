@@ -1,0 +1,25 @@
+.AccessDenied{
+    padding-top: 40px;
+    padding-bottom: 40px;
+    padding-left: auto;
+    padding-right: auto;
+    align-items: center;
+    
+
+}
+p{
+    font-size: 24%;
+    font-weight: bolder;
+    font-family: inherit;
+    text-align: center;
+}
+h1{
+    font-size: 22%;
+    color: #e90b0b;
+    text-align: center;
+}
+img{
+    width: 100%;
+    max-width: 400px;
+    height: auto;
+}
