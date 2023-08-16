@@ -11,19 +11,19 @@ export default function AccessDenied(){
             <Card elevation={24}>
 
                 <CardContent>
-                    <img className="center"  src="./error-sign.jpg" alt="">                                  
+                    <img className="center"  src="./assess-denied.jpg" alt="">                                  
                     
                     </img>
             <Typography variant='h1'>
-                <h1>ERROR IN ACCESSING THE PAGE <br/>  </h1>
+                <h1>ACCESS DENIED<br/>  </h1>
                 </Typography>
                 <Typography variant="h2">
-          <p>  YOU ARE NOT ALLOWED TO ACCESS THIS PAGE PLEASE </p>
+          <p>  YOU ARE SUPPOSED TO LOGIN BEFORE YOU CAN ACCESS THIS PAGE!! </p>
             </Typography>
             </CardContent>
             </Card>
-
-            <Button onClick={(e)=>navigate("/login")}>
+            <br/>
+            <Button className="button" variant="contained" onClick={(e)=>navigate("/login")}>
                 GO TO LOGIN
             </Button>
         </div>

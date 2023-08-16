@@ -1,13 +1,162 @@
-.about-container{
-    text-align: left;
-    color: #110722;
-}
-.heading{
-    font-family: serif;
+.about-container {
+    padding: 20px;
+  }
+  
+  /* Center the heading */
+  .about-container .MuiTypography-h5 {
+    text-align: center;
+  }
+  
+  /* Center the feature heading */
+  .about-container .MuiTypography-root {
+    text-align: center;
+    text-decoration: underline;
     color: blue;
-    font-weight: bolder;
-    font-size: large;
+  }
+  
+  /* Style the list items */
+  .about-container li {
+    list-style-type: square;
+  }
+  
+  /* Adjust the width and height of the image container */
+  .about-container .MuiBox-root > :not(style) {
+    width: 100px;
+    height: 100px;
+    margin: 5px;
+  }
+  
+  /* Adjust the image size */
+  .about-container img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+  
+  /* Add some spacing between cards */
+  .about-container .MuiCardContent-root {
+    padding: 16px;
+    margin-bottom: 16px;
+  }
+  
+  /* Style the paragraph */
+  .about-container .paragraph {
+    text-align: center;
+    font-size: 100px;
+    font-weight: bold;
+    margin-bottom: 100px;
+  }
+  
+  /* Style the customImage container */
+  .about-container .customImage {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+  
+  /* Media Query for devices with width up to 600px */
+  @media (max-width: 600px) {
+    .about-container .MuiTypography-h5 {
+      font-size: 28px;
+    }
+  
+    .about-container .MuiTypography-root {
+      font-size: 18px;
+    }
+  
+    .about-container li {
+      font-size: 16px;
+    }
+  
+    .about-container .MuiBox-root > :not(style) {
+      width: 80px;
+      height: 80px;
+    }
+  
+    .about-container .paragraph {
+      font-size: 48px;
+    }
+    
+  }
+  
+  /* Media Query for devices with width up to 400px */
+  @media (max-width: 400px) {
+    .about-container .MuiTypography-h5 {
+      font-size: 24px;
+    }
+  
+    .about-container .MuiTypography-root {
+      font-size: 16px;
+    }
+  
+    .about-container li {
+      font-size: 14px;
+    }
+  
+    .about-container .MuiBox-root > :not(style) {
+      width: 60px;
+      height: 60px;
+    }
+  
+    .about-container .paragraph {
+      font-size: 28px;
+    }
+  }
 
-}
+  
+/* Styling for the enlarged image */
+.enlarged-image {
+    width: 100%;
+    height: auto;
+    max-height: 80vh; /* Limit the height of the enlarged image */
+  }
+  
+  /* Styling for the close icon */
+  .close-icon {
+    position: absolute;
+    top: 8px;
+    right: 8px;
+    color: white;
+    background-color: rgba(0, 0, 0, 0.7);
+  }
 
+
+
+/* Styling for the modal */
+.modal {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: white;
+    padding: 20px;
+    border-radius: 5px;
+    outline: none;
+  }
+  
+  /* Styling for the overlay */
+  .overlay {
+    background-color: rgba(0, 0, 0, 0.75);
+  }
+  
+  /* Styling for the enlarged image */
+  .enlarged-image {
+    width: 100%;
+    max-width: 800px;
+    height: auto;
+  }
+  
+  /* Styling for the close button */
+  .close-button {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background-color: transparent;
+    color: white;
+    border: none;
+    font-size: 18px;
+    cursor: pointer;
+  }
+  
+  
   

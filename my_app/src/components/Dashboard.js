@@ -2,15 +2,17 @@ import React, { useEffect, useState } from "react";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { useNavigate } from "react-router-dom";
 import "./Dashboard.css";
-import { auth, db, logout} from "../firebase";
+import { db, auth } from "../firebase";
+import todoStore from "../zustandStore";
 import { query, collection, getDocs, where } from "firebase/firestore";
-import { LogoutSuccessToast} from "./Helper";
+import { LogoutSuccessToast } from "./Helper";
 import Homepage from "./Homepage";
 
 function Dashboard() {// eslint-disable-next-line 
   const [user, loading, error] = useAuthState(auth);
   const [name, setName] = useState("");
   const navigate = useNavigate();
+  const logout = todoStore((state) => state.logout);
   const fetchUserName = async () => {
 
     try {
@@ -24,36 +26,36 @@ function Dashboard() {// eslint-disable-next-line
     }
   };
 
-  async function handleLogout(e){
+  async function handleLogout(e) {
     e.preventDefault();
     var response = await logout();
-    if(response === true){
-     LogoutSuccessToast("Logged out Suesfully");
+    if (response === true) {
+      LogoutSuccessToast("Logged out Suesfully");
       navigate("/login");
     }
   }
-  
+
   useEffect(() => {
     if (loading) return;
-    if (!user) return navigate("/access_denied");
+    if (!user) return navigate("/login");
     fetchUserName();// eslint-disable-next-line 
   }, [user, loading]);
 
   return (
     <div className="dashboard">
-       <button className="dashboard__btn" onClick={(e)=>handleLogout(e)}  style={{ display: 'grid', justifyContent: 'end' }}>
-          Logout
-         </button>
-       <div className="dashboard__container">
-       
+      <button className="dashboard__btn" onClick={(e) => handleLogout(e)} style={{ display: 'grid', justifyContent: 'end' }}>
+        Logout
+      </button>
+      <div className="dashboard__container">
+
         YOU ARE WELCOME -
-         {name}
-        
-         {/* <div>{user?.email}</div> */}
-         
-         <Homepage/>
-       </div>
-     </div>
+        {name}
+
+        {/* <div>{user?.email}</div> */}
+
+        <Homepage />
+      </div>
+    </div>
   );
 }
 export default Dashboard;

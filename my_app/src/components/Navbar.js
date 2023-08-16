@@ -1,4 +1,4 @@
-import * as React from 'react';
+import React, { useEffect, useState } from 'react';
 import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
 import Toolbar from '@mui/material/Toolbar';
@@ -11,17 +11,36 @@ import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
 import Tooltip from '@mui/material/Tooltip';
 import MenuItem from '@mui/material/MenuItem';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import CheckCircleIcon from '@mui/icons-material/CheckCircle';
+import todoStore from "../zustandStore.js";
 
-const pages = ['homepage', 'dashboard', 'aboutpage'];
+const pages = ['homepage', 'dashboard', 'aboutpage','gallery'];
 const settings = ['profilepage', 'logout'];
-const NotLoggedPages = ['homepage', 'aboutpage'];
+const NotLoggedPages = ['homepage', 'aboutpage','gallery'];
 const NotLoggedInSettings = ['register', 'login'];
 
-export default function ResponsiveAppBar({ loggedIn }) {
-  const [anchorElNav, setAnchorElNav] = React.useState(null);
-  const [anchorElUser, setAnchorElUser] = React.useState(null);
+export default function ResponsiveAppBar() {
+
+
+  const [anchorElNav, setAnchorElNav] = useState(null);
+  const [anchorElUser, setAnchorElUser] = useState(null);
+  const user = todoStore((state) => state.user); //eslint-disable-next-line
+  const [isLoggedIn, setIsLoggedIn] = useState(user.uid ? true : false);
+  console.log("USER ID: ", user.uid);
+
+  var navigate = useNavigate();
+
+  useEffect(()=>{
+    
+    console.log("THE USER IS: ", user);
+    console.log("IS USER LOGGED IN: ", isLoggedIn);
+    // hek if the user is logged in
+    if(user.uid){
+      navigate("/login");
+    }
+  });
+
 
   const handleOpenNavMenu = (event) => {
     setAnchorElNav(event.currentTarget);
@@ -91,7 +110,7 @@ export default function ResponsiveAppBar({ loggedIn }) {
                 display: { xs: 'block', md: 'none' },
               }}
             >
-              {loggedIn
+              {isLoggedIn
                 ? pages.map((page) => (
                     <MenuItem key={page} onClick={handleCloseNavMenu}>
                       <Typography
@@ -104,15 +123,15 @@ export default function ResponsiveAppBar({ loggedIn }) {
                       </Typography>
                     </MenuItem>
                   ))
-                : NotLoggedPages.map((page) => (
-                    <MenuItem key={page} onClick={handleCloseNavMenu}>
+                : NotLoggedPages.map((NotLoggedPages) => (
+                    <MenuItem key={NotLoggedPages} onClick={handleCloseNavMenu}>
                       <Typography
                         textAlign="center"
                         component={Link}
-                        to={`/${page}`}
+                        to={`/${NotLoggedPages}`}
                         style={{ textDecoration: 'none', color: 'black' }}
                       >
-                        {page}
+                        {NotLoggedPages}
                       </Typography>
                     </MenuItem>
                   ))}
@@ -138,8 +157,8 @@ export default function ResponsiveAppBar({ loggedIn }) {
             TODO APP
           </Typography>
           <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
-            {loggedIn
-              ? pages.map((page) => (
+            {isLoggedIn?
+               pages.map((page) => (
                   <Button
                     key={page}
                     onClick={handleCloseNavMenu}
@@ -151,35 +170,37 @@ export default function ResponsiveAppBar({ loggedIn }) {
                     {page}
                   </Button>
                 ))
-              : NotLoggedPages.map((page) => (
+              : NotLoggedPages.map((NotLoggedPages) => (
                   <Button
-                    key={page}
+                    key={NotLoggedPages}
                     onClick={handleCloseNavMenu}
                     sx={{ my: 2, color: 'white', display: 'block' }}
                     component={Link}
-                    to={`/${page}`}
+                    to={`/${NotLoggedPages}`}
                     style={{ textDecoration: 'none', color: 'black' }}
                   >
-                    {page}
+                    {NotLoggedPages}
                   </Button>
                 ))}
           </Box>
 
           <Box sx={{ flexGrow: 0 }}>
-            {loggedIn ? (
+            {isLoggedIn ? (
               <Tooltip title="Open settings">
                 <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-                  <Avatar alt="" src="/static/images/avatar/2.jpg" />
+                  <Avatar alt="" src="https://res.cloudinary.com/startup-grind/image/upload/
+                  c_fill,dpr_2.0,f_auto,g_center,h_250,q_auto:good,w_250/v1/gcs/platform-data-dsc/avatars/kasozi_denis.jpg" />
                 </IconButton>
               </Tooltip>
             ) : (
               <Tooltip title="Open settings">
                 <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-                  <Avatar alt="" src="/static/images/avatar/2.jpg" />
+                  <Avatar alt="" src="https://res.cloudinary.com/startup-grind/image/upload/
+                  c_fill,dpr_2.0,f_auto,g_center,h_250,q_auto:good,w_250/v1/gcs/platform-data-dsc/avatars/kasozi_denis.jpg" />
                 </IconButton>
               </Tooltip>
             )}
-            <Menu
+            <Menu 
               sx={{ mt: '45px' }}
               id="menu-appbar"
               anchorEl={anchorElUser}
@@ -195,8 +216,8 @@ export default function ResponsiveAppBar({ loggedIn }) {
               open={Boolean(anchorElUser)}
               onClose={handleCloseUserMenu}
             >
-              {loggedIn
-                ? settings.map((setting) => (
+              {isLoggedIn?
+                 settings.map((setting) => (
                     <MenuItem key={setting} onClick={handleCloseUserMenu}>
                       <Typography
                         textAlign="center"
@@ -208,15 +229,15 @@ export default function ResponsiveAppBar({ loggedIn }) {
                       </Typography>
                     </MenuItem>
                   ))
-                : NotLoggedInSettings.map((setting) => (
-                    <MenuItem key={setting} onClick={handleCloseUserMenu}>
+                : NotLoggedInSettings.map((NotLoggedInSetting) => (
+                    <MenuItem key={NotLoggedInSetting} onClick={handleCloseUserMenu}>
                       <Typography
                         textAlign="center"
                         component={Link}
-                        to={`/${setting}`}
+                        to={`/${NotLoggedInSetting}`}
                         style={{ textDecoration: 'none', color: 'black' }}
                       >
-                        {setting}
+                        {NotLoggedInSetting}
                       </Typography>
                     </MenuItem>
                   ))}

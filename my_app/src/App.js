@@ -10,9 +10,10 @@ import Homepage from "./components/Homepage";
 import StickyFooter from './components/StickyFooter';
 import AboutPage from './components/AboutPage';
 import ProfilePage from './components/ProfilePage';
-import AccessDenied from './components/AccessDenied';
+import AccessError from './components/AccessError';
 import BackToTop from './components/BackToTopIcon';
-// import Demo from './components/Demonstration.js';
+import AccessDenied from './components/AccessDenied';
+import Gallery from './components/Gallery';
 
 
 function App() {
@@ -27,13 +28,15 @@ function App() {
         {/* <Route path="/demo" element={<Demonstration />}/> */}
         <Route path="/" element={<Homepage />} />
         <Route path="/homepage" element={<Homepage />} />
-        <Route path ="/access_denied" element={<AccessDenied/>}/>
+        <Route path ="/AccessError" element={<AccessError/>}/>
+        <Route path ="/accessdenied" element={<AccessDenied/>}/>
         <Route path="/register" element={<Register />} />       
         <Route path='/login' element={<Login/>}/>        
         <Route path="/reset" element={<Reset />} />
         <Route path="/dashboard" element={<Dashboard />} />
         <Route path='/aboutpage' element = {<AboutPage/>} />
         <Route path='/profilepage' element={<ProfilePage/>} />
+        <Route path='/gallery' element={<Gallery/>}/>
 
       </Routes>
         <StickyFooter />

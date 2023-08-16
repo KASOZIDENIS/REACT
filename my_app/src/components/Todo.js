@@ -35,9 +35,10 @@ const Todo = ({ item }) => {
   };
 
   const handleSaveClick = () => {
+    setEditMode(false);
     updateTodo()
       .then(() => {
-        setEditMode(false);
+        
         toast.success("Todo updated successfully", { toastId: "edit-success" });
       })
       .catch((error) => {
@@ -45,7 +46,7 @@ const Todo = ({ item }) => {
       });
   };
 
-  const updateTodo = async () => {
+  const updateTodo = async (event) => {
     const todoRef = doc(db, "todos", item.id);
     await updateDoc(todoRef, { todo: editedTodo });
   };
@@ -55,8 +56,11 @@ const Todo = ({ item }) => {
   };
 
   const handleEditInputChange = (event) => {
-    setEditedTodo(event.target.value);
+    if (event && event.target) {
+      setEditedTodo(event.target.value);
+    }
   };
+  
 
   const handleConfirmDelete = () => {
     deleteTodo(item)

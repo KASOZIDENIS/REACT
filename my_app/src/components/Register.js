@@ -6,33 +6,38 @@ import { useNavigate } from "react-router-dom";
 
 import {
   auth,
-  registerWithEmailAndPassword,
-  signInWithGoogle,
 } from "../firebase";
 import "./Register.css";
 import Dashboard from "./Dashboard";
+import todoStore from "../zustandStore";
 
 function Register() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [name, setName] = useState("");// eslint-disable-next-line
   const [user, loading, error] = useAuthState(auth);
+  var loginWithGoogle = todoStore((state) => state.signInWithGoogle);
 
   const navigate = useNavigate();
 
   useEffect(() => {
-    console.log("TEH REGISTER PAGE HAS BEEN VISITED")
+    console.log("THE REGISTER PAGE HAS BEEN VISITED")
     if (loading) return;
     if (user) navigate("/dashboard");
+
   }, [user, loading, navigate]);
 
   if (user) {
-    return <Dashboard/>
+    return <Dashboard />
   }
 
   const register = () => {
-    if (!name) alert("Please enter name");
-    registerWithEmailAndPassword(name, email, password);
+    if (!name) {
+      alert("Please enter name");
+      return;
+    }
+    register(name, email, password);
+
   };
 
   return (
@@ -64,7 +69,7 @@ function Register() {
         </button>
         <button
           className="register__btn register__google"
-          onClick={signInWithGoogle}
+          onClick={loginWithGoogle}
         >
           Register with Google
         </button>

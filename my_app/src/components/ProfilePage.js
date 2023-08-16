@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { useNavigate } from "react-router-dom";
 import "./Dashboard.css";
-import { auth, db} from "../firebase";
+import { auth, db } from "../firebase";
 import { query, collection, getDocs, where } from "firebase/firestore";
 function Dashboard() {// eslint-disable-next-line 
   const [user, loading, error] = useAuthState(auth);
@@ -26,16 +26,16 @@ function Dashboard() {// eslint-disable-next-line
   }, [user, loading]);
   return (
     <div className="dashboard">
-       <div className="dashboard__container">
+      <div className="dashboard__container">
         USER NAME -
-         {name}
-          <br/>
-         
-         <div>EMAIL: {user?.email}</div>
-         
-         
-       </div>
-     </div>
+        {name}
+        <br />
+
+        <div>EMAIL: {user?.email}</div>
+
+
+      </div>
+    </div>
   );
 }
 export default Dashboard;

@@ -1,29 +1,28 @@
-// Login.js
 import React, { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { auth, logInWithEmailAndPassword, signInWithGoogle } from "../firebase";
+import { auth } from "../firebase";
+import todoStore from "../zustandStore";
 import { useAuthState } from "react-firebase-hooks/auth";
 import "./Login.css";
-import Dashboard from "./Dashboard"
+import { LogoInSuccessToast } from "./Helper";
 
 function Login() {
+
+  
+// Getting functions from the store
+const logInWithEmailAndPassword = todoStore((state) => state.login);
+ const signInWithGoogle = todoStore((state) => state.signInWithGoogle);
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [user, loading] = useAuthState(auth);
   const navigate = useNavigate();
 
-
   useEffect(() => {
     console.log("login clicked");
     if (loading) return;
-      if (user) navigate("/dashboard");    
-    
+    if (user) navigate("/dashboard");
   }, [user, loading, navigate]);
-
-  if (user) {
-    return <Dashboard />
-  }
 
   return (
     <div className="login">
@@ -45,15 +44,22 @@ function Login() {
 
         <button
           className="login__btn"
-          onClick={async () => {
-            var response = await logInWithEmailAndPassword(email, password);
-
-            if (response) {
-              console.log("successfull");
-              navigate("/dashboard");
-            } else {
-              // displayErrorToast("dfdf");
-            }
+          onClick={() => {
+            // Call the logInWithEmailAndPassword function from the store
+            logInWithEmailAndPassword(email, password)
+              .then((response) => {
+                if (response) {
+                  console.log("Successfully logged in");
+                  navigate("/dashboard");
+                  LogoInSuccessToast();
+                } else {
+                  // displayErrorToast("dfdf");
+                }
+              })
+              .catch((error) => {
+                console.log("Error logging in:", error);
+                // Handle the error here or display an error message to the user
+              });
           }}
         >
           Login

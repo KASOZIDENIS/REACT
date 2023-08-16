@@ -67,6 +67,14 @@ import { green } from '@mui/material/colors';
       
       
     });
+    const LogoInSuccessToast=()=> toast.success("Logged In Successfully!!", {
+      position: toast.POSITION.TOP_CENTER,
+      hideProgressBar:true,
+      backgroundcolor:green,
+      theme:'colored'
+      
+      
+    });
       
     export{
       //alerts
@@ -83,6 +91,7 @@ import { green } from '@mui/material/colors';
       InfoToast,
       DefaultToast,
       LogoutSuccessToast,
+      LogoInSuccessToast,
          }
   
 
